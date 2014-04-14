@@ -1,6 +1,6 @@
 <?php
 
-require_once 'src/LinusU/Bitcoin/AddressValidator.php';
+require_once 'src/AddressValidator.php';
 
 use \LinusU\Bitcoin\AddressValidator;
 
