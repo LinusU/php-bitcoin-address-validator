@@ -4,14 +4,16 @@ namespace LinusU\Bitcoin;
 
 class AddressValidator {
 
-    CONST MAINNET = "00";
-    CONST TESTNET = "6F";
+    CONST MAINNET = "MAINNET";
+    CONST TESTNET = "TESTNET";
 
-    static public function isValid($addr, $version = null) {
+    CONST MAINNET_PUBKEY = "00";
+    CONST MAINNET_SCRIPT = "05";
 
-        if (is_null($version)) {
-            $version = self::MAINNET;
-        }
+    CONST TESTNET_PUBKEY = "6F";
+    CONST TESTNET_SCRIPT = "C4";
+
+    static public function typeOf($addr) {
 
         if (preg_match('/[^1-9A-HJ-NP-Za-km-z]/', $addr)) {
             return false;
@@ -23,9 +25,7 @@ class AddressValidator {
             return false;
         }
 
-        if (substr($decoded, 0, 2) != $version && substr($decoded, 0, 2) != "05") {
-            return false;
-        }
+        $version = substr($decoded, 0, 2);
 
         $check = substr($decoded, 0, strlen($decoded) - 8);
         $check = pack("H*", $check);
@@ -34,7 +34,41 @@ class AddressValidator {
         $check = strtoupper($check);
         $check = substr($check, 0, 8);
 
-        return ($check == substr($decoded, strlen($decoded) - 8));
+        $isValid = ($check == substr($decoded, strlen($decoded) - 8));
+
+        return ($isValid ? $version : false);
+    }
+
+    static public function isValid($addr, $version = null) {
+
+        $type = self::typeOf($addr);
+
+        if ($type === false) {
+            return false;
+        }
+
+        if (is_null($version)) {
+            $version = self::MAINNET;
+        }
+
+        switch ($version) {
+            case self::MAINNET:
+              $valids = [self::MAINNET_PUBKEY, self::MAINNET_SCRIPT];
+              break;
+            case self::TESTNET:
+              $valids = [self::TESTNET_PUBKEY, self::TESTNET_SCRIPT];
+              break;
+            case self::MAINNET_PUBKEY:
+            case self::MAINNET_SCRIPT:
+            case self::TESTNET_PUBKEY:
+            case self::TESTNET_SCRIPT:
+              $valids = [$version];
+              break;
+            default:
+              throw new Exception('Unknown version constant');
+        }
+
+        return in_array($type, $valids);
     }
 
     static protected function decodeAddress($data) {

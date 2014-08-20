@@ -85,6 +85,25 @@ class AddressValidatorTest extends PHPUnit_Framework_TestCase {
         'myoqcgYiehufrsnnkqdqbp69dddVDMopJu'
     ];
 
+    protected $scriptAddrs = [
+        '3CMNFxN1oHBc4R1EpboAL5yzHGgE611Xou',
+        '3QjYXhTkvuj8qPaXHTTWb5wjXhdsLAAWVy',
+        '3AnNxabYGoTxYiTEZwFEnerUoeFXK2Zoks',
+        '33vt8ViH5jsr115AGkW6cEmEz9MpvJSwDk',
+        '3QCzvfL4ZRvmJFiWWBVwxfdaNBT8EtxB5y',
+        '37Sp6Rv3y4kVd1nQ1JV5pfqXccHNyZm1x3',
+        '3ALJH9Y951VCGcVZYAdpA3KchoP9McEj1G'
+    ];
+
+    protected $scriptTestnet = [
+        '2N2JD6wb56AfK4tfmM6PwdVmoYk2dCKf4Br',
+        '2NBFNJTktNa7GZusGbDbGKRZTxdK9VVez3n',
+        '2NB72XtkjpnATMggui83aEtPawyyKvnbX2o',
+        '2MxgPqX1iThW3oZVk9KoFcE5M4JpiETssVN',
+        '2NEWDzHWwY5ZZp8CQWbB7ouNMLqCia6YRda',
+        '2N7FuwuUuoTBrDFdrAZ9KxBmtqMLxce9i1C'
+    ];
+
     function testInvalidAddrsMainnet() {
         foreach ($this->invalidAddrs as $addr) {
             $this->assertEquals(false, AddressValidator::isValid($addr), 'Should be invalid: ' . $addr);
@@ -106,6 +125,18 @@ class AddressValidatorTest extends PHPUnit_Framework_TestCase {
     function testValidAddrsTestnet() {
         foreach ($this->validTestnet as $addr) {
             $this->assertEquals(true, AddressValidator::isValid($addr, AddressValidator::TESTNET), 'Should be valid: ' . $addr);
+        }
+    }
+
+    function testScriptAddrsMainnet() {
+        foreach ($this->scriptAddrs as $addr) {
+            $this->assertEquals(AddressValidator::typeOf($addr), AddressValidator::MAINNET_SCRIPT, 'Should be script: ' . $addr);
+        }
+    }
+
+    function testScriptAddrsTestnet() {
+        foreach ($this->scriptTestnet as $addr) {
+            $this->assertEquals(AddressValidator::typeOf($addr), AddressValidator::TESTNET_SCRIPT, 'Should be script: ' . $addr);
         }
     }
 
