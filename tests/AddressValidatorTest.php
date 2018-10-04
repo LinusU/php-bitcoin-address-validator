@@ -73,7 +73,9 @@ class AddressValidatorTest extends PHPUnit_Framework_TestCase {
         '1Gqk4Tv79P91Cc1STQtU3s1W6277M2CVWu',
         '1JwMWBVLtiqtscbaRHai4pqHokhFCbtoB4',
         '19dcawoKcZdQz365WpXWMhX6QCUpR9SY4r',
-        '13p1ijLwsnrcuyqcTvJXkq2ASdXqcnEBLE'
+        '13p1ijLwsnrcuyqcTvJXkq2ASdXqcnEBLE',
+        'bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq',
+        'bc1qrp33g0q5c5txsp9arysrx4k6zdkfs4nce4xj0gdcccefvpysxf3qccfmv3',
     ];
 
     protected $validTestnet = [
@@ -82,7 +84,9 @@ class AddressValidatorTest extends PHPUnit_Framework_TestCase {
         'n3LnJXCqbPjghuVs8ph9CYsAe4Sh4j97wk',
         'mhaMcBxNh5cqXm4aTQ6EcVbKtfL6LGyK2H',
         'mizXiucXRCsEriQCHUkCqef9ph9qtPbZZ6',
-        'myoqcgYiehufrsnnkqdqbp69dddVDMopJu'
+        'myoqcgYiehufrsnnkqdqbp69dddVDMopJu',
+        'tb1qw508d6qejxtdg4y5r3zarvary0c5xw7kxpjzsx',
+        'tb1qrp33g0q5c5txsp9arysrx4k6zdkfs4nce4xj0gdcccefvpysxf3q0sl5k7'
     ];
 
     protected $scriptAddrs = [
