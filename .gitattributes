@@ -1,0 +1,13 @@
+* text=auto
+*.css linguist-vendored
+*.scss linguist-vendored
+*.js linguist-vendored
+*.svg binary
+CHANGELOG.md export-ignore
+package-lock.json -diff
+yarn.lock -diff
+composer.lock -diff
+
+# this library
+/test export-ignore
+
