@@ -9,5 +9,8 @@ yarn.lock -diff
 composer.lock -diff
 
 # this library
+/bootstrap export-ignore
+/resources export-ignore
 /test export-ignore
-
+/bitbucket-pipelines.yml export-ignore
+/runtests export-ignore
